@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arthur Sandor Voundi Koe — Academic Portfolio</title>
+<meta name="description" content="Arthur Sandor Voundi Koe — researcher in applied cryptography: attribute-based encryption, mobile cloud security, blockchain, and privacy-preserving computation. State Key Laboratory of Integrated Service Networks, Xidian University.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --ink-3: #6b6b6b;
+    --paper: #fafafa;
+    --line: #e5e5e5;
+    --accent: #FF5F1F;
+    --serif: 'Source Serif 4', Georgia, serif;
+    --sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+    --ease-custom: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: #ddd; }
+
+  .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+
+  /* ---------- header / nav ---------- */
+  header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(250,250,250,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav {
+    display: flex; align-items: baseline; justify-content: space-between;
+    padding: 18px 0;
+  }
+  .nav-name {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
+    text-transform: uppercase; text-decoration: none; color: var(--ink);
+  }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em;
+    text-transform: uppercase; color: var(--ink-3); text-decoration: none;
+    transition: color 150ms;
+  }
+  .nav-links a:hover { color: var(--ink); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 110px 0 90px; border-bottom: 1px solid var(--line); }
+  .hero .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-3); margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(44px, 7vw, 84px);
+    line-height: 1.02; letter-spacing: -0.015em;
+  }
+  .hero h1 em { font-style: italic; font-weight: 400; }
+  .hero .role {
+    margin-top: 34px; max-width: 620px;
+    font-size: 17px; color: var(--ink-3);
+  }
+  .hero-meta {
+    margin-top: 44px; display: flex; flex-wrap: wrap; gap: 12px 40px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  }
+  .hero-meta span b { color: var(--ink); font-weight: 500; }
+  .hero-meta a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color 150ms; }
+  .hero-meta a:hover { border-color: var(--ink); }
+
+  /* ---------- section scaffolding ---------- */
+  section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  .sec-head {
+    display: flex; align-items: baseline; gap: 18px; margin-bottom: 52px;
+  }
+  .sec-num {
+    font-family: var(--mono); font-size: 12px; color: var(--accent);
+  }
+  .sec-title {
+    font-family: var(--serif); font-weight: 300; font-size: 34px;
+    letter-spacing: -0.01em;
+  }
+  .sec-line { flex: 1; border-top: 1px dashed var(--ink); opacity: 0.25; transform: translateY(-4px); }
+
+  /* ---------- about ---------- */
+  .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
+  .about-grid p + p { margin-top: 16px; }
+  .about-side h3 {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--ink-3); font-weight: 500;
+    margin: 26px 0 10px;
+  }
+  .about-side h3:first-child { margin-top: 0; }
+  .about-side ul { list-style: none; }
+  .about-side li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .about-side li span { font-family: var(--mono); font-size: 11px; color: var(--ink-3); display: block; }
+
+  /* ---------- publications ---------- */
+  .pub-year {
+    display: grid; grid-template-columns: 110px 1fr; gap: 32px;
+    padding: 34px 0; border-top: 1px solid var(--line);
+  }
+  .pub-year:first-of-type { border-top: none; padding-top: 0; }
+  .year-label {
+    font-family: var(--serif); font-weight: 300; font-size: 44px;
+    line-height: 1; color: var(--ink); letter-spacing: -0.02em;
+  }
+  .year-count { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-top: 8px; display: block; }
+  .pub { padding: 16px 0 16px 24px; position: relative; }
+  .pub + .pub { border-top: 1px dashed #d8d8d8; }
+  .pub::before {
+    content: ''; position: absolute; left: 0; top: 26px;
+    width: 7px; height: 7px; border: 1px solid var(--ink); background: var(--paper);
+    transition: background 200ms;
+  }
+  .pub:hover::before { background: var(--accent); border-color: var(--accent); }
+  .pub-title {
+    font-family: var(--serif); font-size: 19px; font-weight: 400;
+    line-height: 1.35;
+  }
+  .pub-title a { color: var(--ink); text-decoration: none; }
+  .pub-title a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .pub-authors { font-size: 13.5px; color: var(--ink-3); margin-top: 5px; }
+  .pub-authors b { color: var(--ink); font-weight: 500; }
+  .pub-venue {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3);
+    margin-top: 6px; letter-spacing: 0.02em;
+  }
+  .pub-venue .tag {
+    display: inline-block; border: 1px solid var(--line); padding: 1px 8px;
+    margin-right: 8px; border-radius: 999px; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink);
+  }
+
+  /* ---------- dark band: code & contact ---------- */
+  .band { background: var(--ink); color: var(--paper); }
+  .band .sec-title { color: var(--paper); }
+  .band .sec-line { border-color: var(--paper); opacity: 0.35; }
+  .code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(250,250,250,0.14); border: 1px solid rgba(250,250,250,0.14); }
+  .code-cell { background: var(--ink); padding: 40px; }
+  .code-cell h3 { font-family: var(--serif); font-weight: 300; font-size: 24px; margin-bottom: 10px; }
+  .code-cell p { color: rgba(250,250,250,0.6); font-size: 14px; margin-bottom: 22px; }
+  .code-cell a.btn {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--paper); text-decoration: none;
+    border: 1px solid rgba(250,250,250,0.35); border-radius: 999px;
+    padding: 10px 22px; display: inline-block; transition: all 200ms;
+  }
+  .code-cell a.btn:hover { background: var(--paper); color: var(--ink); }
+
+  /* ---------- footer ---------- */
+  footer { padding: 48px 0 64px; }
+  footer .foot {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+  }
+  footer a { color: var(--ink-3); text-decoration: none; }
+  footer a:hover { color: var(--ink); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+
+  /* ---------- reveal motion ---------- */
+  .reveal { opacity: 0; filter: blur(10px); transform: translateY(12px); transition: opacity 700ms var(--ease-custom), filter 700ms var(--ease-custom), transform 700ms var(--ease-custom); }
+  .reveal.visible { opacity: 1; filter: blur(0); transform: translateY(0); }
+
+  @media (max-width: 820px) {
+    .about-grid, .code-grid { grid-template-columns: 1fr; }
+    .pub-year { grid-template-columns: 1fr; gap: 12px; }
+    .year-label { font-size: 34px; }
+    .nav-links { gap: 16px; }
+    .hero { padding: 72px 0 64px; }
+    section { padding: 64px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="nav-name" href="#top">A.&thinsp;S.&thinsp;Voundi&nbsp;Koe</a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#publications">Publications</a>
+        <a href="#code">Code</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ================= HERO ================= -->
+  <div class="hero">
+    <div class="container">
+      <div class="kicker reveal">Applied Cryptography · Mobile Cloud Security · Member, IEEE</div>
+      <h1 class="reveal">Arthur Sandor<br><em>Voundi Koe</em></h1>
+      <p class="role reveal">
+        Researcher in applied cryptography, working on attribute-based encryption,
+        revocable access control, and privacy-preserving computation for mobile
+        cloud computing and blockchain systems.
+      </p>
+      <div class="hero-meta reveal">
+        <span><b>Affiliation</b> — State Key Laboratory of Integrated Service Networks, Xidian University, Xi'an, China</span>
+        <span><b>Email</b> — <a href="mailto:sandorvoundi@xidian.edu.cn">sandorvoundi@xidian.edu.cn</a></span>
+        <span><b>GitHub</b> — <a href="https://github.com/arthursandorvk">@arthursandorvk</a></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">01</span>
+        <h2 class="sec-title">About</h2>
+        <span class="sec-line"></span>
+      </div>
+      <div class="about-grid">
+        <div class="reveal">
+          <p>
+            My research centers on cryptographic access control for outsourced
+            data: how to let resource-constrained devices enforce fine-grained,
+            revocable policies over cloud-stored data without trusting any single
+            party. My recent work introduces a decentralized, lightweight
+            server-aided revocable ABE scheme for mobile cloud computing —
+            eliminating the fully trusted key generation center, supporting
+            unlimited data users, and replacing time-based revocation with
+            state-triggered updates, published in <i>IEEE Transactions on
+            Dependable and Secure Computing</i>.
+          </p>
+          <p>
+            Earlier work spans decentralized multi-authority attribute-based
+            encryption, proxy re-encryption, medical-data access control,
+            location privacy, and blockchain security — including smart-contract
+            vulnerability detection, selfish-mining attacks, and gateway-based
+            blockchain constructions for IoT.
+          </p>
+        </div>
+        <div class="about-side reveal">
+          <h3>Research Interests</h3>
+          <ul>
+            <li>Attribute-based encryption &amp; revocation</li>
+            <li>Mobile cloud computing security</li>
+            <li>Privacy-preserving computation</li>
+            <li>Blockchain &amp; self-sovereign identity</li>
+            <li>Trusted execution environments</li>
+          </ul>
+          <h3>Affiliations</h3>
+          <ul>
+            <li>Xidian University — State Key Lab of ISN<span>current</span></li>
+            <li>Guangzhou University — School of Computer Science and Cyber Engineering</li>
+            <li>Hunan University — College of Computer Science and Electronics Engineering</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= PUBLICATIONS ================= -->
+  <section id="publications">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Publications</h2>
+        <span class="sec-line"></span>
+      </div>
+
+      <!-- 2026 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2026</span><span class="year-count">1 paper</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.1109/TDSC.2026.3696736">Decentralized and Lightweight Server-Aided Revocable Attribute-Based Encryption for Mobile Cloud Computing</a></div>
+            <div class="pub-authors"><b>Arthur Sandor Voundi Koe</b>, Jianghong Wei, Xiaofeng Chen</div>
+            <div class="pub-venue"><span class="tag">Journal</span>IEEE Transactions on Dependable and Secure Computing, 23(5):9918–9933 · doi:10.1109/TDSC.2026.3696736</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2025 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2025</span><span class="year-count">1 paper</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.1007/978-981-96-1528-5_5">Secure and Revocable Multi-authority CP-ABE for Mobile Cloud Computing</a></div>
+            <div class="pub-authors">Junyang Li, Hongyang Yan, <b>Arthur Sandor Voundi Koe</b>, Weichu Deng, Zhengxi Zhong</div>
+            <div class="pub-venue"><span class="tag">Conference</span>Springer LNCS · doi:10.1007/978-981-96-1528-5_5</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2024 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2024</span><span class="year-count">2 papers</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.1016/j.jisa.2024.103885">Self-sovereign identity management in ciphertext policy attribute based encryption for IoT protocols</a></div>
+            <div class="pub-authors">Weichu Deng, Jin Li, Hongyang Yan, <b>Arthur Sandor Voundi Koe</b>, Teng Huang, Jianfeng Wang, Cong Peng</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Journal of Information Security and Applications · doi:10.1016/j.jisa.2024.103885</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">Towards Key-Escrow Free Attribute-Based Encryption for Self-Sovereign Identity Systems</div>
+            <div class="pub-authors">Zhengxi Zhong, Hongyang Yan, <b>Arthur Sandor Voundi Koe</b>, Weichu Deng, Junyang Li</div>
+            <div class="pub-venue"><span class="tag">Conference</span>IEEE/ACM IWQoS 2024, pp. 1–10</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2023 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2023</span><span class="year-count">3 papers</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title">Hieraledger: Towards malicious gateways in appendable-block blockchain constructions for IoT</div>
+            <div class="pub-authors"><b>Arthur Sandor Voundi Koe</b>, Shan Ai, Qi Chen, Juan Tang, Kongyang Chen, Shiwen Zhang, Xiehua Li</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Information Sciences, 632:87–104</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.1002/cpe.7404">A real-time privacy-preserving scheme based on grouping queries for continuous location-based services</a></div>
+            <div class="pub-authors">Shiwen Zhang, Haoyu Li, Wei Liang, <b>Voundi Koe Arthur Sandor</b></div>
+            <div class="pub-venue"><span class="tag">Journal</span>Concurrency and Computation: Practice and Experience, 35(19), e7404 · doi:10.1002/cpe.7404</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">A Secure and Flexible Blockchain-Based Offline Payment Protocol</div>
+            <div class="pub-authors">Wanqing Jie, Wangjie Qiu, <b>Arthur Sandor Voundi Koe</b>, Jianhong Li, Yin Wang, Yaqi Wu, Jin Li, Zhiming Zheng</div>
+            <div class="pub-venue"><span class="tag">Conference</span>2023</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2022 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2022</span><span class="year-count">4 papers</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.1002/int.23009">Outsourcing multiauthority access control revocation and computations over medical data to mobile cloud</a></div>
+            <div class="pub-authors"><b>Arthur S. Voundi Koe</b>, Qi Chen, Juan Tang, Shan Ai, Hongyang Yan, Shiwen Zhang, Duncan S. Wong</div>
+            <div class="pub-venue"><span class="tag">Journal</span>International Journal of Intelligent Systems, 37(11):9774–9797 · doi:10.1002/int.23009</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">Sender anonymity: Applying ring signature in gateway-based blockchain for IoT is not enough</div>
+            <div class="pub-authors"><b>Arthur Sandor Voundi Koe</b>, Shan Ai, Pengfei Huang, Anli Yan, Juan Tang, Qi Chen, Kanghua Mo, Wanqing Jie, Shiwen Zhang</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Information Sciences, 606:60–71</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">BSM-Ether: Bribery selfish mining in blockchain-based healthcare systems</div>
+            <div class="pub-authors">Yilei Wang, Zhaojie Wang, Ming Zhao, Xiaoyan Han, Huan Zhou, Xiaoying Wang, <b>Arthur Sandor Voundi Koe</b></div>
+            <div class="pub-venue"><span class="tag">Journal</span>Information Sciences, 601:1–17</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.3390/s22166141">A Survey of Dummy-Based Location Privacy Protection Techniques for Location-Based Services</a></div>
+            <div class="pub-authors">Shiwen Zhang, Mengling Li, Wei Liang, <b>Voundi Koe Arthur Sandor</b>, Xiong Li</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Sensors, 22(16):6141 · doi:10.3390/s22166141</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2021 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2021</span><span class="year-count">3 papers</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title">Revocable Outsourcing Multi-Authority ABE for Medical Data in Mobile Cloud</div>
+            <div class="pub-authors"><b>Arthur Sandor Voundi Koe</b>, Juan Tang, Shan Ai, Hongyang Yan, Shiwen Zhang</div>
+            <div class="pub-venue"><span class="tag">Conference</span>IEEE CPSCom 2021, pp. 338–345</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">Full-Stack Hierarchical Fusion of Static Features for Smart Contracts Vulnerability Detection</div>
+            <div class="pub-authors"><b>Arthur Sandor Voundi Koe</b>, Pengfei Huang, Shiwen Zhang, Wanqing Jie</div>
+            <div class="pub-venue"><span class="tag">Conference</span>IEEE Blockchain 2021, pp. 95–102</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">A Novel Blockchain-Based Privacy-preserving Framework for Online Social Networks</div>
+            <div class="pub-authors">Shiwen Zhang, Tingting Yao, <b>Voundi Koe Arthur Sandor</b>, Tien-Hsiung Weng, Wei Liang, Jinshu Su</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Connection Science, 33(3):555–575</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2020 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2020</span><span class="year-count">1 paper</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title"><a href="https://doi.org/10.1109/ACCESS.2020.3018940">A Secure and Efficient Task Matching Scheme for Spatial Crowdsourcing</a></div>
+            <div class="pub-authors">Fulin Zhou, Junyi Li, Yaping Lin, Jianhao Wei, <b>Voundi Koe Arthur Sandor</b></div>
+            <div class="pub-venue"><span class="tag">Journal</span>IEEE Access, 8:155819–155831 · doi:10.1109/ACCESS.2020.3018940</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2019 -->
+      <div class="pub-year reveal">
+        <div><span class="year-label">2019</span><span class="year-count">2 papers</span></div>
+        <div>
+          <div class="pub">
+            <div class="pub-title">Efficient Decentralized Multi-authority Attribute based Encryption for Mobile Cloud Data Storage</div>
+            <div class="pub-authors"><b>Voundi Koe Arthur Sandor</b>, Yaping Lin, Xiehua Li, Feng Lin, Shiwen Zhang</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Journal of Network and Computer Applications, 129:25–36</div>
+          </div>
+          <div class="pub">
+            <div class="pub-title">Offline privacy preserving proxy re-encryption in mobile cloud computing</div>
+            <div class="pub-authors"><b>Arthur Sandor Voundi Koe</b>, Yaping Lin</div>
+            <div class="pub-venue"><span class="tag">Journal</span>Pervasive and Mobile Computing, 59</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ================= CODE ================= -->
+  <section id="code" class="band">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">03</span>
+        <h2 class="sec-title">Code &amp; Artifacts</h2>
+        <span class="sec-line"></span>
+      </div>
+      <div class="code-grid reveal">
+        <div class="code-cell">
+          <h3>Decentralized-Revocable-ABE-MCC</h3>
+          <p>
+            Reference implementation of the IEEE TDSC 2026 paper — a decentralized,
+            server-aided revocable CP-ABE scheme in Charm-Crypto, covering all
+            fourteen operations with user and attribute revocation demos.
+          </p>
+          <a class="btn" href="https://github.com/arthursandorvk/Decentralized-Revocable-ABE-MCC">View repository</a>
+        </div>
+        <div class="code-cell">
+          <h3>GitHub profile</h3>
+          <p>
+            All public source code, experiments, and benchmark artifacts
+            accompanying my publications.
+          </p>
+          <a class="btn" href="https://github.com/arthursandorvk">@arthursandorvk</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">04</span>
+        <h2 class="sec-title">Contact</h2>
+        <span class="sec-line"></span>
+      </div>
+      <div class="reveal" style="max-width: 640px;">
+        <p>
+          I welcome collaboration on attribute-based encryption, revocable access
+          control, and privacy-preserving systems for mobile cloud and blockchain.
+          For questions about the TDSC 2026 implementation, please open an issue
+          on the repository or write to me directly.
+        </p>
+        <div class="hero-meta" style="margin-top: 32px;">
+          <span><b>Email</b> — <a href="mailto:sandorvoundi@xidian.edu.cn">sandorvoundi@xidian.edu.cn</a></span>
+          <span><b>Address</b> — State Key Laboratory of Integrated Service Networks, Xidian University, Xi'an 710071, China</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container">
+    <div class="foot">
+      <span>© 2026 Arthur Sandor Voundi Koe</span>
+      <span>
+        <a href="https://github.com/arthursandorvk">GitHub</a> ·
+        <a href="https://doi.org/10.1109/TDSC.2026.3696736">Latest paper</a> ·
+        <a href="mailto:sandorvoundi@xidian.edu.cn">Email</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll-triggered reveal: opacity + blur + translate, 700ms custom ease.
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+</script>
+
+</body>
+</html>
