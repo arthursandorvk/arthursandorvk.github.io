@@ -10,11 +10,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,300;8..60,400;8..60,600&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0a0a0a;
-    --ink-3: #6b6b6b;
-    --paper: #fafafa;
-    --line: #e5e5e5;
-    --accent: #FF5F1F;
+    --ink: #17110f;
+    --ink-3: #756b68;
+    --paper: #fdfcfa;
+    --line: #ece4e1;
+    --red: #c8102e;
+    --red-deep: #8e0c20;
+    --red-tint: #fbeef0;
     --serif: 'Source Serif 4', Georgia, serif;
     --sans: 'Inter', -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     --mono: 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
@@ -30,14 +32,14 @@
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
   }
-  ::selection { background: #ddd; }
+  ::selection { background: var(--red); color: #fff; }
 
   .container { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
 
   /* ---------- header / nav ---------- */
   header {
     position: sticky; top: 0; z-index: 50;
-    background: rgba(250,250,250,0.85);
+    background: rgba(253,252,250,0.88);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--line);
   }
@@ -49,37 +51,75 @@
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em;
     text-transform: uppercase; text-decoration: none; color: var(--ink);
   }
-  .nav-links { display: flex; gap: 28px; }
+  .nav-name .dot { color: var(--red); }
+  .nav-links { display: flex; gap: 26px; }
   .nav-links a {
     font-family: var(--mono); font-size: 11px; letter-spacing: 0.05em;
     text-transform: uppercase; color: var(--ink-3); text-decoration: none;
     transition: color 150ms;
   }
-  .nav-links a:hover { color: var(--ink); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .nav-links a:hover { color: var(--red); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
 
-  /* ---------- hero ---------- */
-  .hero { padding: 110px 0 90px; border-bottom: 1px solid var(--line); }
-  .hero .kicker {
-    font-family: var(--mono); font-size: 11px; letter-spacing: 0.14em;
-    text-transform: uppercase; color: var(--ink-3); margin-bottom: 28px;
+  /* ---------- banner / hero ---------- */
+  .banner {
+    position: relative;
+    background:
+      radial-gradient(ellipse 60% 80% at 85% 15%, rgba(255,255,255,0.10), transparent 60%),
+      linear-gradient(135deg, var(--red-deep) 0%, var(--red) 58%, #e03350 100%);
+    color: #fff;
+    overflow: hidden;
   }
-  .hero h1 {
+  /* fine hairline grid etched over the banner */
+  .banner::before {
+    content: ''; position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+    pointer-events: none;
+  }
+  .banner-inner { position: relative; padding: 120px 0 0; }
+  .banner .kicker {
+    font-family: var(--mono); font-size: 11px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 30px;
+  }
+  .banner h1 {
     font-family: var(--serif); font-weight: 300;
-    font-size: clamp(44px, 7vw, 84px);
-    line-height: 1.02; letter-spacing: -0.015em;
+    font-size: clamp(46px, 7.5vw, 88px);
+    line-height: 1.0; letter-spacing: -0.015em; color: #fff;
   }
-  .hero h1 em { font-style: italic; font-weight: 400; }
-  .hero .role {
-    margin-top: 34px; max-width: 620px;
-    font-size: 17px; color: var(--ink-3);
+  .banner h1 em { font-style: italic; font-weight: 400; }
+  .banner .role {
+    margin-top: 34px; max-width: 640px;
+    font-size: 17px; color: rgba(255,255,255,0.85);
   }
-  .hero-meta {
-    margin-top: 44px; display: flex; flex-wrap: wrap; gap: 12px 40px;
-    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  .banner-meta {
+    margin-top: 46px; display: flex; flex-wrap: wrap; gap: 14px 42px;
+    font-family: var(--mono); font-size: 12px; color: rgba(255,255,255,0.7);
   }
-  .hero-meta span b { color: var(--ink); font-weight: 500; }
-  .hero-meta a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color 150ms; }
-  .hero-meta a:hover { border-color: var(--ink); }
+  .banner-meta span b { color: #fff; font-weight: 500; }
+  .banner-meta a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.4); transition: border-color 150ms; }
+  .banner-meta a:hover { border-color: #fff; }
+
+  /* stats strip at the base of the banner */
+  .banner-stats {
+    margin-top: 74px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid rgba(255,255,255,0.22);
+  }
+  .stat {
+    padding: 26px 24px 30px;
+    border-right: 1px solid rgba(255,255,255,0.22);
+  }
+  .stat:last-child { border-right: none; }
+  .stat .num {
+    font-family: var(--serif); font-weight: 300; font-size: 40px; line-height: 1;
+    color: #fff;
+  }
+  .stat .lbl {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.12em;
+    text-transform: uppercase; color: rgba(255,255,255,0.65); margin-top: 8px;
+  }
 
   /* ---------- section scaffolding ---------- */
   section { padding: 88px 0; border-bottom: 1px solid var(--line); }
@@ -87,17 +127,19 @@
     display: flex; align-items: baseline; gap: 18px; margin-bottom: 52px;
   }
   .sec-num {
-    font-family: var(--mono); font-size: 12px; color: var(--accent);
+    font-family: var(--mono); font-size: 12px; color: var(--red);
   }
   .sec-title {
     font-family: var(--serif); font-weight: 300; font-size: 34px;
     letter-spacing: -0.01em;
   }
-  .sec-line { flex: 1; border-top: 1px dashed var(--ink); opacity: 0.25; transform: translateY(-4px); }
+  .sec-line { flex: 1; border-top: 1px dashed var(--ink); opacity: 0.22; transform: translateY(-4px); }
 
   /* ---------- about ---------- */
   .about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 64px; }
   .about-grid p + p { margin-top: 16px; }
+  .about-grid a { color: var(--red); text-decoration: none; }
+  .about-grid a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
   .about-side h3 {
     font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em;
     text-transform: uppercase; color: var(--ink-3); font-weight: 500;
@@ -105,8 +147,40 @@
   }
   .about-side h3:first-child { margin-top: 0; }
   .about-side ul { list-style: none; }
-  .about-side li { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+  .about-side li { padding: 8px 0 8px 16px; border-bottom: 1px solid var(--line); font-size: 14px; position: relative; }
+  .about-side li::before { content: ''; position: absolute; left: 0; top: 16px; width: 6px; height: 6px; background: var(--red); }
   .about-side li span { font-family: var(--mono); font-size: 11px; color: var(--ink-3); display: block; }
+
+  /* ---------- conferences ---------- */
+  .conf {
+    display: grid; grid-template-columns: 150px 1fr auto; gap: 28px;
+    align-items: baseline;
+    padding: 26px 0; border-top: 1px solid var(--line);
+    transition: background 200ms;
+  }
+  .conf:first-of-type { border-top: none; padding-top: 0; }
+  .conf:hover { background: linear-gradient(90deg, var(--red-tint), transparent 70%); }
+  .conf-date {
+    font-family: var(--mono); font-size: 12px; color: var(--red);
+    letter-spacing: 0.04em;
+  }
+  .conf-name {
+    font-family: var(--serif); font-size: 21px; font-weight: 400; line-height: 1.3;
+  }
+  .conf-name a { color: var(--ink); text-decoration: none; }
+  .conf-name a:hover { color: var(--red); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .conf-venue { font-size: 13.5px; color: var(--ink-3); margin-top: 4px; }
+  .conf-cta {
+    font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--red); text-decoration: none;
+    border: 1px solid var(--red); border-radius: 999px; padding: 8px 18px;
+    white-space: nowrap; transition: all 200ms;
+  }
+  .conf-cta:hover { background: var(--red); color: #fff; }
+  .conf-note {
+    margin-top: 40px; font-family: var(--mono); font-size: 11.5px;
+    color: var(--ink-3); border-left: 2px solid var(--red); padding-left: 14px;
+  }
 
   /* ---------- publications ---------- */
   .pub-year {
@@ -120,19 +194,19 @@
   }
   .year-count { font-family: var(--mono); font-size: 11px; color: var(--ink-3); margin-top: 8px; display: block; }
   .pub { padding: 16px 0 16px 24px; position: relative; }
-  .pub + .pub { border-top: 1px dashed #d8d8d8; }
+  .pub + .pub { border-top: 1px dashed #e3d9d6; }
   .pub::before {
     content: ''; position: absolute; left: 0; top: 26px;
     width: 7px; height: 7px; border: 1px solid var(--ink); background: var(--paper);
-    transition: background 200ms;
+    transition: all 200ms;
   }
-  .pub:hover::before { background: var(--accent); border-color: var(--accent); }
+  .pub:hover::before { background: var(--red); border-color: var(--red); }
   .pub-title {
     font-family: var(--serif); font-size: 19px; font-weight: 400;
     line-height: 1.35;
   }
   .pub-title a { color: var(--ink); text-decoration: none; }
-  .pub-title a:hover { text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  .pub-title a:hover { color: var(--red); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
   .pub-authors { font-size: 13.5px; color: var(--ink-3); margin-top: 5px; }
   .pub-authors b { color: var(--ink); font-weight: 500; }
   .pub-venue {
@@ -140,35 +214,50 @@
     margin-top: 6px; letter-spacing: 0.02em;
   }
   .pub-venue .tag {
-    display: inline-block; border: 1px solid var(--line); padding: 1px 8px;
-    margin-right: 8px; border-radius: 999px; font-size: 10px;
-    letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink);
+    display: inline-block; border: 1px solid var(--red); color: var(--red);
+    padding: 1px 8px; margin-right: 8px; border-radius: 999px; font-size: 10px;
+    letter-spacing: 0.08em; text-transform: uppercase;
   }
 
-  /* ---------- dark band: code & contact ---------- */
-  .band { background: var(--ink); color: var(--paper); }
+  /* ---------- dark band: code ---------- */
+  .band {
+    background:
+      radial-gradient(ellipse 50% 90% at 12% 100%, rgba(200,16,46,0.35), transparent 60%),
+      var(--ink);
+    color: var(--paper);
+  }
   .band .sec-title { color: var(--paper); }
-  .band .sec-line { border-color: var(--paper); opacity: 0.35; }
-  .code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(250,250,250,0.14); border: 1px solid rgba(250,250,250,0.14); }
+  .band .sec-line { border-color: var(--paper); opacity: 0.3; }
+  .band .sec-num { color: #ff7d94; }
+  .code-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: rgba(253,252,250,0.14); border: 1px solid rgba(253,252,250,0.14); }
   .code-cell { background: var(--ink); padding: 40px; }
   .code-cell h3 { font-family: var(--serif); font-weight: 300; font-size: 24px; margin-bottom: 10px; }
-  .code-cell p { color: rgba(250,250,250,0.6); font-size: 14px; margin-bottom: 22px; }
+  .code-cell p { color: rgba(253,252,250,0.6); font-size: 14px; margin-bottom: 22px; }
   .code-cell a.btn {
     font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase;
     color: var(--paper); text-decoration: none;
-    border: 1px solid rgba(250,250,250,0.35); border-radius: 999px;
+    border: 1px solid rgba(253,252,250,0.35); border-radius: 999px;
     padding: 10px 22px; display: inline-block; transition: all 200ms;
   }
-  .code-cell a.btn:hover { background: var(--paper); color: var(--ink); }
+  .code-cell a.btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+  /* ---------- contact ---------- */
+  .contact a { color: var(--red); text-decoration: none; border-bottom: 1px solid var(--line); }
+  .contact a:hover { border-color: var(--red); }
+  .contact-meta {
+    margin-top: 32px; display: flex; flex-wrap: wrap; gap: 14px 42px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  }
+  .contact-meta b { color: var(--ink); font-weight: 500; }
 
   /* ---------- footer ---------- */
-  footer { padding: 48px 0 64px; }
+  footer { padding: 48px 0 64px; background: var(--paper); }
   footer .foot {
     display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px;
     font-family: var(--mono); font-size: 11px; color: var(--ink-3);
   }
   footer a { color: var(--ink-3); text-decoration: none; }
-  footer a:hover { color: var(--ink); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
+  footer a:hover { color: var(--red); text-decoration: underline; text-decoration-style: dashed; text-underline-offset: 4px; }
 
   /* ---------- reveal motion ---------- */
   .reveal { opacity: 0; filter: blur(10px); transform: translateY(12px); transition: opacity 700ms var(--ease-custom), filter 700ms var(--ease-custom), transform 700ms var(--ease-custom); }
@@ -178,8 +267,13 @@
     .about-grid, .code-grid { grid-template-columns: 1fr; }
     .pub-year { grid-template-columns: 1fr; gap: 12px; }
     .year-label { font-size: 34px; }
-    .nav-links { gap: 16px; }
-    .hero { padding: 72px 0 64px; }
+    .conf { grid-template-columns: 1fr; gap: 8px; }
+    .conf-cta { justify-self: start; margin-top: 6px; }
+    .banner-stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(-n+2) { border-bottom: 1px solid rgba(255,255,255,0.22); }
+    .nav-links { gap: 14px; }
+    .banner-inner { padding-top: 80px; }
     section { padding: 64px 0; }
   }
 </style>
@@ -189,9 +283,10 @@
 <header>
   <div class="container">
     <nav>
-      <a class="nav-name" href="#top">A.&thinsp;S.&thinsp;Voundi&nbsp;Koe</a>
+      <a class="nav-name" href="#top">A.&thinsp;S.&thinsp;Voundi&nbsp;Koe<span class="dot">.</span></a>
       <div class="nav-links">
         <a href="#about">About</a>
+        <a href="#conferences">Conferences</a>
         <a href="#publications">Publications</a>
         <a href="#code">Code</a>
         <a href="#contact">Contact</a>
@@ -202,9 +297,9 @@
 
 <main id="top">
 
-  <!-- ================= HERO ================= -->
-  <div class="hero">
-    <div class="container">
+  <!-- ================= BANNER ================= -->
+  <div class="banner">
+    <div class="container banner-inner">
       <div class="kicker reveal">Applied Cryptography · Mobile Cloud Security · Member, IEEE</div>
       <h1 class="reveal">Arthur Sandor<br><em>Voundi Koe</em></h1>
       <p class="role reveal">
@@ -212,10 +307,16 @@
         revocable access control, and privacy-preserving computation for mobile
         cloud computing and blockchain systems.
       </p>
-      <div class="hero-meta reveal">
+      <div class="banner-meta reveal">
         <span><b>Affiliation</b> — State Key Laboratory of Integrated Service Networks, Xidian University, Xi'an, China</span>
-        <span><b>Email</b> — <a href="mailto:sandorvoundi@xidian.edu.cn">sandorvoundi@xidian.edu.cn</a></span>
+        <span><b>Email</b> — <a href="/cdn-cgi/l/email-protection#7c0f1d1218130e0a13091218153c041518151d1252191809521f12"><span class="__cf_email__" data-cfemail="384b59565c574a4e574d565c517840515c515956165d5c4d165b56">[email&#160;protected]</span></a></span>
         <span><b>GitHub</b> — <a href="https://github.com/arthursandorvk">@arthursandorvk</a></span>
+      </div>
+      <div class="banner-stats reveal">
+        <div class="stat"><div class="num">17</div><div class="lbl">Publications</div></div>
+        <div class="stat"><div class="num">7+</div><div class="lbl">Years of research</div></div>
+        <div class="stat"><div class="num">3</div><div class="lbl">Institutions</div></div>
+        <div class="stat"><div class="num">1</div><div class="lbl">IEEE TDSC paper</div></div>
       </div>
     </div>
   </div>
@@ -238,8 +339,9 @@
             server-aided revocable ABE scheme for mobile cloud computing —
             eliminating the fully trusted key generation center, supporting
             unlimited data users, and replacing time-based revocation with
-            state-triggered updates, published in <i>IEEE Transactions on
-            Dependable and Secure Computing</i>.
+            state-triggered updates, published in
+            <a href="https://doi.org/10.1109/TDSC.2026.3696736"><i>IEEE Transactions on
+            Dependable and Secure Computing</i></a>.
           </p>
           <p>
             Earlier work spans decentralized multi-authority attribute-based
@@ -269,11 +371,37 @@
     </div>
   </section>
 
+  <!-- ================= CONFERENCES ================= -->
+  <section id="conferences">
+    <div class="container">
+      <div class="sec-head reveal">
+        <span class="sec-num">02</span>
+        <h2 class="sec-title">Upcoming Conferences</h2>
+        <span class="sec-line"></span>
+      </div>
+
+      <div class="conf reveal">
+        <div class="conf-date">2026 · Nanjing</div>
+        <div>
+          <div class="conf-name"><a href="http://dspp2026.com/">DSPP 2026 — International Conference on Data Security and Privacy Protection</a></div>
+          <div class="conf-venue">Nanjing, China · Topics of interest: data security, privacy protection, applied cryptography</div>
+        </div>
+        <a class="conf-cta" href="http://dspp2026.com/">Conference site</a>
+      </div>
+
+      <div class="conf-note reveal">
+        <!-- To add a conference: copy one .conf block above and update the
+             date/location, name (with link), venue line, and CTA URL. -->
+        This list tracks conferences I plan to attend or submit to. More entries coming soon.
+      </div>
+    </div>
+  </section>
+
   <!-- ================= PUBLICATIONS ================= -->
   <section id="publications">
     <div class="container">
       <div class="sec-head reveal">
-        <span class="sec-num">02</span>
+        <span class="sec-num">03</span>
         <h2 class="sec-title">Publications</h2>
         <span class="sec-line"></span>
       </div>
@@ -426,7 +554,7 @@
   <section id="code" class="band">
     <div class="container">
       <div class="sec-head reveal">
-        <span class="sec-num">03</span>
+        <span class="sec-num">04</span>
         <h2 class="sec-title">Code &amp; Artifacts</h2>
         <span class="sec-line"></span>
       </div>
@@ -453,10 +581,10 @@
   </section>
 
   <!-- ================= CONTACT ================= -->
-  <section id="contact">
+  <section id="contact" class="contact">
     <div class="container">
       <div class="sec-head reveal">
-        <span class="sec-num">04</span>
+        <span class="sec-num">05</span>
         <h2 class="sec-title">Contact</h2>
         <span class="sec-line"></span>
       </div>
@@ -467,8 +595,8 @@
           For questions about the TDSC 2026 implementation, please open an issue
           on the repository or write to me directly.
         </p>
-        <div class="hero-meta" style="margin-top: 32px;">
-          <span><b>Email</b> — <a href="mailto:sandorvoundi@xidian.edu.cn">sandorvoundi@xidian.edu.cn</a></span>
+        <div class="contact-meta">
+          <span><b>Email</b> — <a href="/cdn-cgi/l/email-protection#7d0e1c1319120f0b12081319143d051419141c1353181908531e13"><span class="__cf_email__" data-cfemail="2d5e4c4349425f5b42584349446d554449444c4303484958034e43">[email&#160;protected]</span></a></span>
           <span><b>Address</b> — State Key Laboratory of Integrated Service Networks, Xidian University, Xi'an 710071, China</span>
         </div>
       </div>
@@ -484,13 +612,13 @@
       <span>
         <a href="https://github.com/arthursandorvk">GitHub</a> ·
         <a href="https://doi.org/10.1109/TDSC.2026.3696736">Latest paper</a> ·
-        <a href="mailto:sandorvoundi@xidian.edu.cn">Email</a>
+        <a href="/cdn-cgi/l/email-protection#cfbcaea1aba0bdb9a0baa1aba68fb7a6aba6aea1e1aaabbae1aca1">Email</a>
       </span>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   // Scroll-triggered reveal: opacity + blur + translate, 700ms custom ease.
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
